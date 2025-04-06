@@ -1,0 +1,24 @@
+WORKSPACE/restaurant/src/main/java/com/examly/
+├── entity/
+│   ├── Customer.java
+│   ├── Restaurant.java
+│   ├── MenuItem.java
+│   ├── Order.java
+│   ├── OrderItem.java
+│   └── Payment.java
+├── service/
+│   ├── CustomerService.java
+│   ├── CustomerServiceImpl.java
+│   ├── RestaurantService.java
+│   ├── RestaurantServiceImpl.java
+│   ├── MenuService.java
+│   ├── MenuServiceImpl.java
+│   ├── OrderService.java
+│   ├── OrderServiceImpl.java
+│   ├── PaymentService.java
+│   └── PaymentServiceImpl.java
+├── exception/
+│   ├── EmailAlreadyRegisteredException.java
+│   └── RestaurantNotFoundException.java
+└── util/
+    └── DbConnectionUtil.java
