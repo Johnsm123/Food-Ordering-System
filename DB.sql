@@ -1,64 +1,55 @@
--- Create Database
-CREATE DATABASE appdb;
-USE appdb;
+use appdb;
 
--- Customer Table
-CREATE TABLE customer (
-    customerId INT PRIMARY KEY,
+create table customer(
+    customerId int PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     phoneNumber VARCHAR(15),
     password VARCHAR(255) NOT NULL
 );
-
--- Restaurant Table
-CREATE TABLE restaurant (
-    restaurantId INT PRIMARY KEY,
+create Table restaurant(
+    restaurantId int PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     address VARCHAR(255) NOT NULL,
-    cuisineType VARCHAR(50),
+    cuisineType VARCHAR(55),
     contactNumber VARCHAR(15)
 );
 
--- MenuItem Table
-CREATE TABLE menu_item (
-    itemId INT PRIMARY KEY,
+create Table menuItem(
+    itemId int PRIMARY KEY AUTO_INCREMENT,
     restaurantId INT,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT null,
     price DOUBLE NOT NULL,
     description VARCHAR(255),
-    availableQuantity INT NOT NULL,
-    FOREIGN KEY (restaurantId) REFERENCES restaurant(restaurantId)
+    availableQuantity int not null,
+    Foreign Key (restaurantId) REFERENCES restaurant(restaurantId)
 );
 
--- Order Table (Note: `order` is a reserved keyword, so use backticks)
-CREATE TABLE `order` (
-    orderId INT PRIMARY KEY,
-    customerId INT,
-    restaurantId INT,
-    orderStatus VARCHAR(20),
+create table `order`(
+    orderId int primary key AUTO_INCREMENT,
+    customerId int,
+    restaurantId int,
+    orderStatus VARCHAR(35),
     totalPrice DOUBLE NOT NULL,
     deliveryAddress VARCHAR(255),
-    FOREIGN KEY (customerId) REFERENCES customer(customerId),
-    FOREIGN KEY (restaurantId) REFERENCES restaurant(restaurantId)
+    Foreign Key (customerId) REFERENCES customer(customerId),
+    Foreign Key (restaurantId) REFERENCES restaurant(restaurantId)
 );
 
--- OrderItem Table
-CREATE TABLE order_item (
-    orderId INT,
+create Table orderItem(
+    orderId int,
     itemId INT,
     quantity INT NOT NULL,
-    PRIMARY KEY (orderId, itemId),
-    FOREIGN KEY (orderId) REFERENCES `order`(orderId),
-    FOREIGN KEY (itemId) REFERENCES menu_item(itemId)
+    PRIMARY KEY(orderId, itemId),
+    Foreign Key (orderId) REFERENCES `order`(orderId),
+    Foreign Key (itemId) REFERENCES menuItem(itemId)
 );
 
--- Payment Table
-CREATE TABLE payment (
-    paymentId INT PRIMARY KEY,
+create Table payment(
+    paymentId int PRIMARY KEY,
     orderId INT,
     paymentDate DATETIME NOT NULL,
-    paymentStatus VARCHAR(20),
+    paymentStatus VARCHAR(25),
     amountPaid DOUBLE NOT NULL,
-    FOREIGN KEY (orderId) REFERENCES `order`(orderId)
+    Foreign Key (orderId) REFERENCES `order`(orderId)
 );
